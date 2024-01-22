@@ -1,0 +1,23 @@
+-- para a criacao da tabela a ser estudada
+CREATE TABLE retail_sales(  
+    sales_month	DATE,
+    naics_code	 VARCHAR,
+    kind_of_business VARCHAR,	
+    reason_for_null	 VARCHAR,
+    sales DECIMAL
+);
+
+
+COPY retail_sales 
+FROM 'C:\Users\renanalmeida\Desktop\SQLfDS\us_retail_sales.csv'
+DELIMITER ','
+CSV HEADER;
+
+--select, from, join, where, group and order by, limit offset
+SELECT date_part('year',sales_month) as sales_year
+,sum(sales) as sales
+FROM retail_sales
+WHERE kind_of_business = 'Retail and food services sales, total'
+GROUP BY 1
+order by sales_year ASC
+;
